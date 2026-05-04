@@ -153,11 +153,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .slide-right img {
   -webkit-user-drag: none;
 }
-/* Custom scrollbar */
+/* Custom scrollbars */
 .slide-right::-webkit-scrollbar { height: 8px; }
 .slide-right::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
 .slide-right::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
 .slide-right::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
+
+.slide-content::-webkit-scrollbar { width: 8px; }
+.slide-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+.slide-content::-webkit-scrollbar-thumb { background: rgba(231, 76, 60, 0.6); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+.slide-content::-webkit-scrollbar-thumb:hover { background: rgba(231, 76, 60, 0.9); border: 2px solid transparent; background-clip: padding-box; }
 
 .phones-row{
   display:flex;
@@ -366,7 +371,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
   .slide-left { width: 100%; height: auto; padding: 100px 40px 20px 40px; justify-content: flex-start; flex: none; }
   .slide-left h2 { font-size: 3rem; }
   .slide-right { width: 100%; height: auto; flex: none; padding: 10px 20px 80px 20px; align-items: flex-start; flex-wrap: wrap; justify-content: center; overflow-x: hidden; }
-  .phone-frame { width: 200px; height: 420px; } /* Keep them large enough to read, rely on horizontal scroll */
+  .phones-row { flex-wrap: wrap; justify-content: center; width: 100%; padding-right: 0; }
+  .phone-frame { width: 200px; height: 420px; }
   .modal-info { max-width: 100%; text-align: center; margin-top: 20px; }
   #modal-overlay .modal-content { flex-direction: column; align-items: center; padding: 30px; overflow-y: auto; max-height: 90vh; width: 95%; gap: 20px; }
   .modal-phone { width: 300px; height: 630px; } /* Enlarge modal phone on tablets */
@@ -390,8 +396,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 }
 
 @media (max-width: 480px) {
-  /* Keep phones reasonably large so text is visible in gallery, scroll horizontally */
-  .phone-frame { width: 180px; height: 378px; } 
+  .slide-right { padding: 10px; }
+  /* Create a perfect 2-column grid for phones on mobile */
+  .phones-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; }
+  
+  .phone-wrap { width: 100%; }
+  .phone-frame { width: 100%; height: auto; aspect-ratio: 220 / 462; border-width: 3px; border-radius: 15px; } 
   
   /* Make modal take up maximum possible screen real estate */
   .modal-phone { width: 280px; height: 588px; border-radius: 35px; border-width: 6px; }
