@@ -216,9 +216,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 
 /* ── SKELETON LOADER ── */
 .skeleton {
-  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.5s infinite !important;
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }
@@ -1202,24 +1202,29 @@ function openModal(imgSrc, title, desc, retries = 3) {
   document.getElementById('modal-desc').textContent = desc;
   document.getElementById('modal-overlay').classList.add('active');
 
-  const tempImg = new Image();
-  tempImg.onload = () => {
-    imgEl.src = tempImg.src;
-    imgEl.style.opacity = '1';
-    imgEl.classList.add('loaded');
-    modalPhone.classList.remove('skeleton');
-  };
-  tempImg.onerror = () => {
+  imgEl.onerror = () => {
     if (retries > 0) {
       console.warn('Image load failed, retrying...', imgSrc);
       setTimeout(() => openModal(imgSrc, title, desc, retries - 1), 500);
     } else {
       imgEl.alt = "Failed to load screenshot.";
+      imgEl.style.opacity = '1';
       modalPhone.classList.remove('skeleton');
     }
   };
-  // Cache busting query for retries
-  tempImg.src = retries < 3 ? imgSrc + '?retry=' + Date.now() : imgSrc;
+
+  imgEl.onload = () => {
+    imgEl.style.opacity = '1';
+    imgEl.classList.add('loaded');
+    modalPhone.classList.remove('skeleton');
+  };
+
+  imgEl.src = retries < 3 ? imgSrc + '?retry=' + Date.now() : imgSrc;
+
+  // Fallback for already cached images if onload doesn't fire
+  if (imgEl.complete) {
+    imgEl.onload();
+  }
 }
 
 function handleImgError(imgEl) {
