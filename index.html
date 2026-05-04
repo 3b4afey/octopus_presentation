@@ -278,6 +278,18 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
   width:120px; height:32px; background:#222; border-radius:0 0 18px 18px; z-index:2;
 }
 .modal-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: opacity 0.4s ease; }
+.modal-phone.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: inherit;
+  animation: shimmer-loading 1.2s ease-in-out infinite;
+}
+@keyframes shimmer-loading {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
 .modal-info { color: #fff; flex: 1; }
 .modal-info h3 { font-size: 2.4rem; font-weight: 800; margin-bottom: 20px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .modal-info h3 span { color: #e74c3c; }
@@ -1053,7 +1065,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     <button class="modal-close" onclick="closeModal(event)">×</button>
     <div class="modal-phone">
       <div class="modal-notch"></div>
-      <img id="modal-img" src="" alt="Screen Detail" />
+
     </div>
     <div class="modal-info">
       <h3 id="modal-title"><span>Screen</span> Title</h3>
@@ -1185,46 +1197,50 @@ slideRights.forEach(container => {
 });
 
 // Modal Logic
-function openModal(imgSrc, title, desc, retries = 3) {
+function openModal(imgSrc, title, desc) {
   if (window.isDragging) return;
-  
-  const modalPhone = document.querySelector('.modal-phone');
-  const imgEl = document.getElementById('modal-img');
-  
-  // Apply skeleton to modal phone while loading
-  modalPhone.classList.add('skeleton');
-  imgEl.style.opacity = '0';
-  imgEl.classList.remove('loaded');
-  
+
+  const overlay = document.getElementById('modal-overlay');
+  const phoneDiv = document.querySelector('.modal-phone');
+
+  // Remove any existing image
+  const oldImg = document.getElementById('modal-img');
+  if (oldImg) oldImg.remove();
+
+  // Show modal immediately with loading state
+  phoneDiv.classList.add('loading');
+  overlay.classList.add('active');
+
   const words = title.split(' ');
   const firstWord = words.shift();
   document.getElementById('modal-title').innerHTML = '<span>' + firstWord + '</span> ' + words.join(' ');
   document.getElementById('modal-desc').textContent = desc;
-  document.getElementById('modal-overlay').classList.add('active');
 
-  imgEl.onerror = () => {
-    if (retries > 0) {
-      console.warn('Image load failed, retrying...', imgSrc);
-      setTimeout(() => openModal(imgSrc, title, desc, retries - 1), 500);
-    } else {
-      imgEl.alt = "Failed to load screenshot.";
-      imgEl.style.opacity = '1';
-      modalPhone.classList.remove('skeleton');
-    }
+  // Create a brand new img element
+  const img = document.createElement('img');
+  img.id = 'modal-img';
+  img.alt = title || 'Screen Detail';
+  img.style.opacity = '0';
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.objectFit = 'cover';
+  img.style.borderRadius = 'inherit';
+
+  // Register onload BEFORE setting src
+  img.onload = function () {
+    img.style.transition = 'opacity 0.3s ease';
+    img.style.opacity = '1';
+    phoneDiv.classList.remove('loading');
   };
 
-  imgEl.onload = () => {
-    imgEl.style.opacity = '1';
-    imgEl.classList.add('loaded');
-    modalPhone.classList.remove('skeleton');
+  img.onerror = function () {
+    phoneDiv.classList.remove('loading');
+    img.style.opacity = '0.3';
   };
 
-  imgEl.src = retries < 3 ? imgSrc + '?retry=' + Date.now() : imgSrc;
-
-  // Fallback for already cached images if onload doesn't fire
-  if (imgEl.complete) {
-    imgEl.onload();
-  }
+  // Append to DOM first, then set src last
+  phoneDiv.appendChild(img);
+  img.src = imgSrc; // ← ALWAYS last
 }
 
 function handleImgError(imgEl) {
@@ -1237,13 +1253,19 @@ function handleImgError(imgEl) {
   }
 }
 
-function closeModal(evt) {
-  if (evt) evt.stopPropagation();
-  document.getElementById('modal-overlay').classList.remove('active');
-  // Clear the image source after animation to prevent flickering next time
+function closeModal(event) {
+  if (event) event.stopPropagation();
+  const overlay = document.getElementById('modal-overlay');
+  overlay.classList.remove('active');
+
   setTimeout(() => {
-    document.getElementById('modal-img').src = '';
-  }, 500);
+    const img = document.getElementById('modal-img');
+    if (img) {
+      img.src = ''; // cancel any pending load
+      img.remove();
+    }
+    document.querySelector('.modal-phone').classList.remove('loading');
+  }, 300); // match CSS transition duration
 }
 </script>
 </body>
