@@ -205,7 +205,25 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
   position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:80px;height:26px;background:#000;border-radius:0 0 14px 14px;z-index:2;
 }
-.phone-frame img{width:100%;height:100%;object-fit:cover;object-position:top; transition: transform 0.6s var(--ease);}
+.phone-frame img{
+  width:100%;height:100%;object-fit:cover;object-position:top; 
+  transition: transform 0.6s var(--ease), opacity 0.4s ease;
+  opacity: 0;
+}
+.phone-frame img.loaded {
+  opacity: 1;
+}
+
+/* ── SKELETON LOADER ── */
+.skeleton {
+  background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
 .phone-wrap:hover .phone-frame img { transform: scale(1.06); }
 
 /* Hover overlay */
@@ -259,7 +277,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
   position:absolute; top:0; left:50%; transform:translateX(-50%);
   width:120px; height:32px; background:#222; border-radius:0 0 18px 18px; z-index:2;
 }
-.modal-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.modal-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: opacity 0.4s ease; }
 .modal-info { color: #fff; flex: 1; }
 .modal-info h3 { font-size: 2.4rem; font-weight: 800; margin-bottom: 20px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .modal-info h3 span { color: #e74c3c; }
@@ -365,33 +383,33 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/53_Onboarding_Screens_For_The_Application.jpg', 'App Onboarding', 'The initial welcome experience highlighting the value propositions of the Octopus app, such as discovering services, saving time, and secure payments.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/53_Onboarding_Screens_For_The_Application.jpg" alt="App Onboarding" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/53_Onboarding_Screens_For_The_Application.jpg" alt="App Onboarding" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">App Onboarding</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/54_Login_Screen.jpg', 'Login Screen', 'A clean, accessible login interface allowing existing users to enter their credentials or new users to navigate to registration. It includes social login options.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/54_Login_Screen.jpg" alt="Login Screen" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/54_Login_Screen.jpg" alt="Login Screen" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Login Screen</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/55_Forget_Password_Screen.jpg', 'Forgot Password', 'The account recovery flow where users can request a password reset link via their registered email address.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/55_Forget_Password_Screen.jpg" alt="Forgot Password" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/55_Forget_Password_Screen.jpg" alt="Forgot Password" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Forgot Password</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/56_Otp_Screen_authentication.jpg', 'OTP Authentication', 'A secure One-Time Password input screen for verifying user identity during registration or password recovery.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/56_Otp_Screen_authentication.jpg" alt="OTP Authentication" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/56_Otp_Screen_authentication.jpg" alt="OTP Authentication" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">OTP Authentication</p>
@@ -412,25 +430,25 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/05_Consumer_Home.jpg', 'Consumer Home', 'The primary dashboard for consumers featuring a personalized greeting, quick-access location switcher, and dynamically loaded top service providers.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/05_Consumer_Home.jpg" alt="Consumer Home" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/05_Consumer_Home.jpg" alt="Consumer Home" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Consumer Home</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/06_Notifications.jpg', 'Notifications Centre', 'A centralized hub for all user alerts, including booking updates, new messages, and promotional offers from nearby providers.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/06_Notifications.jpg" alt="Notifications Centre" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/06_Notifications.jpg" alt="Notifications Centre" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Notifications Centre</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/07_All_Categories.jpg', 'All Categories', 'A visually rich grid displaying every service category available on the platform, allowing users to browse specific market sectors.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/07_All_Categories.jpg" alt="All Categories" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/07_All_Categories.jpg" alt="All Categories" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">All Categories</p>
@@ -451,49 +469,49 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/47_Search_And_searchHsitory.jpg', 'Search & History', 'The main search interface displaying recent queries and trending searches to accelerate the discovery process.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/47_Search_And_searchHsitory.jpg" alt="Search & History" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/47_Search_And_searchHsitory.jpg" alt="Search & History" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Search & History</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/08_Search_Results.jpg', 'Search Results', 'A robust listing of service providers matching the user\'s query, filterable by distance, rating, and price.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/08_Search_Results.jpg" alt="Search Results" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/08_Search_Results.jpg" alt="Search Results" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Search Results</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/09_No_Search_Results.jpg', 'No Search Results', 'A friendly empty state shown when no providers match the query, prompting the user to adjust filters or try broader terms.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/09_No_Search_Results.jpg" alt="No Search Results" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/09_No_Search_Results.jpg" alt="No Search Results" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">No Search Results</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/10_AI_Voice_Assistant.jpg', 'AI Voice Assistant', 'An interactive voice interface allowing users to search for services hands-free using natural language processing.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/10_AI_Voice_Assistant.jpg" alt="AI Voice Assistant" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/10_AI_Voice_Assistant.jpg" alt="AI Voice Assistant" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">AI Voice Assistant</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.8s" onclick="openModal('./Octopus screens/11_AI_Chat.jpg', 'AI Chat Response', 'The conversational AI assistant responding to user queries with tailored service recommendations.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/11_AI_Chat.jpg" alt="AI Chat Response" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/11_AI_Chat.jpg" alt="AI Chat Response" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">AI Chat Response</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.9s" onclick="openModal('./Octopus screens/48_Ai_Search_Results.jpg', 'AI Search Results', 'A specialized results screen generated purely by AI recommendations based on complex, multi-variable user requests.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/48_Ai_Search_Results.jpg" alt="AI Search Results" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/48_Ai_Search_Results.jpg" alt="AI Search Results" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">AI Search Results</p>
@@ -514,25 +532,25 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/60_Services_On_MapScreen.jpg', 'Services on Map', 'Interactive map interface dropping pins for nearby service providers based on the user\'s current GPS location.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/60_Services_On_MapScreen.jpg" alt="Services on Map" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/60_Services_On_MapScreen.jpg" alt="Services on Map" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Services on Map</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/58_What\'sHot_On_MapScreen.jpg', 'What\'s Hot on Map', 'A heatmap or highlight view showing trending areas with high service activity or popular new businesses.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/58_What'sHot_On_MapScreen.jpg" alt="What's Hot on Map" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/58_What'sHot_On_MapScreen.jpg" alt="What's Hot on Map" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">What's Hot on Map</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/61_Social_OnMapScreen.jpg', 'Social on Map', 'A unique view projecting social clubs, user activities, and community events directly onto the geographical map.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/61_Social_OnMapScreen.jpg" alt="Social on Map" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/61_Social_OnMapScreen.jpg" alt="Social on Map" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Social on Map</p>
@@ -553,33 +571,33 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/12_No_Bookings.jpg', 'Bookings (Empty)', 'The empty state for the bookings tab, encouraging users to discover and schedule their first service.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/12_No_Bookings.jpg" alt="Bookings (Empty)" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/12_No_Bookings.jpg" alt="Bookings (Empty)" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Bookings (Empty)</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/17_Inbox.jpg', 'Inbox Overview', 'The central messaging hub displaying all active conversations with service providers and community members.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/17_Inbox.jpg" alt="Inbox Overview" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/17_Inbox.jpg" alt="Inbox Overview" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Inbox Overview</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/18_Inbox_Swipe_Actions.jpg', 'Inbox Swipe Actions', 'Demonstrating the intuitive UI interactions, such as swiping a conversation to quickly archive or delete it.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/18_Inbox_Swipe_Actions.jpg" alt="Inbox Swipe Actions" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/18_Inbox_Swipe_Actions.jpg" alt="Inbox Swipe Actions" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Inbox Swipe Actions</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/49_Chat_With_Provider.jpg', 'Chat with Provider', 'The real-time messaging interface where consumers can negotiate terms, ask questions, or coordinate with a provider.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/49_Chat_With_Provider.jpg" alt="Chat with Provider" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/49_Chat_With_Provider.jpg" alt="Chat with Provider" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Chat with Provider</p>
@@ -600,41 +618,41 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/14_Social_Profile_Details.jpg', 'Social Profile Details', 'The user\'s own social profile, displaying their bio, interests, and the social clubs they are affiliated with.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/14_Social_Profile_Details.jpg" alt="Social Profile Details" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/14_Social_Profile_Details.jpg" alt="Social Profile Details" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Social Profile Details</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/45_View_Social_Profile.jpg', 'View Social Profile', 'The public-facing view of a user\'s social profile as seen by other members of the Octopus community.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/45_View_Social_Profile.jpg" alt="View Social Profile" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/45_View_Social_Profile.jpg" alt="View Social Profile" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">View Social Profile</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/46_Manage_Clubs_For_User.jpg', 'Manage Clubs', 'A management interface where users can oversee the clubs they have created or currently moderate.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/46_Manage_Clubs_For_User.jpg" alt="Manage Clubs" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/46_Manage_Clubs_For_User.jpg" alt="Manage Clubs" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Manage Clubs</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/15_Club_details.jpg', 'Club Details', 'A detailed view of a specific social club, showing its members, rules, upcoming events, and group discussion board.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/15_Club_details.jpg" alt="Club Details" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/15_Club_details.jpg" alt="Club Details" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Club Details</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.8s" onclick="openModal('./Octopus screens/16_Create_Club.jpg', 'Create Club', 'The onboarding flow for establishing a brand new social club, requiring a name, description, and privacy settings.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/16_Create_Club.jpg" alt="Create Club" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/16_Create_Club.jpg" alt="Create Club" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Create Club</p>
@@ -655,89 +673,89 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/26_Settings_and_types.jpg', 'Settings Overview', 'The main configuration hub for the app, offering access to account, privacy, payment, and application preferences.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/26_Settings_and_types.jpg" alt="Settings Overview" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/26_Settings_and_types.jpg" alt="Settings Overview" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Settings Overview</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/28_Edit_Profile.jpg', 'Edit Profile', 'A form allowing users to update their personal information, such as name, phone number, and avatar.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/28_Edit_Profile.jpg" alt="Edit Profile" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/28_Edit_Profile.jpg" alt="Edit Profile" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Edit Profile</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/29_Saved_Locations.jpg', 'Saved Locations', 'A list of the user\'s frequently used addresses (e.g., Home, Work) for quick checkout and map centering.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/29_Saved_Locations.jpg" alt="Saved Locations" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/29_Saved_Locations.jpg" alt="Saved Locations" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Saved Locations</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/01_Add_New_Address.jpg', 'Add New Address', 'A map-integrated form for precisely dropping a pin and saving a new delivery or service location.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/01_Add_New_Address.jpg" alt="Add New Address" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/01_Add_New_Address.jpg" alt="Add New Address" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Add New Address</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.8s" onclick="openModal('./Octopus screens/19_Security_Settings.jpg', 'Security Settings', 'Options for updating passwords, enabling two-factor authentication, and managing active sessions.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/19_Security_Settings.jpg" alt="Security Settings" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/19_Security_Settings.jpg" alt="Security Settings" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Security Settings</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.9s" onclick="openModal('./Octopus screens/20_Payment_Settings.jpg', 'Payment Settings', 'A secure vault for managing saved credit cards, viewing transaction history, and setting default payment methods.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/20_Payment_Settings.jpg" alt="Payment Settings" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/20_Payment_Settings.jpg" alt="Payment Settings" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Payment Settings</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1s" onclick="openModal('./Octopus screens/21_Add_New_card_Payment_settings.jpg', 'Add Payment Card', 'The PCI-compliant input screen for securely adding a new credit or debit card to the user\'s account.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/21_Add_New_card_Payment_settings.jpg" alt="Add Payment Card" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/21_Add_New_card_Payment_settings.jpg" alt="Add Payment Card" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Add Payment Card</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1.1s" onclick="openModal('./Octopus screens/22_Notification_settings_From_Settings.jpg', 'Notification Settings', 'Granular toggles allowing users to opt in or out of push notifications, emails, and SMS alerts.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/22_Notification_settings_From_Settings.jpg" alt="Notification Settings" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/22_Notification_settings_From_Settings.jpg" alt="Notification Settings" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Notification Settings</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1.2000000000000002s" onclick="openModal('./Octopus screens/23_Language_Selection.jpg', 'Language Selection', 'Internationalization settings letting users switch the entire application interface to their preferred language.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/23_Language_Selection.jpg" alt="Language Selection" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/23_Language_Selection.jpg" alt="Language Selection" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Language Selection</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1.3s" onclick="openModal('./Octopus screens/24_Theme_Selection.jpg', 'Theme Selection', 'Options to force Light Mode, Dark Mode, or sync the app\'s appearance with the device\'s system settings.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/24_Theme_Selection.jpg" alt="Theme Selection" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/24_Theme_Selection.jpg" alt="Theme Selection" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Theme Selection</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1.4s" onclick="openModal('./Octopus screens/27_Settings_UI_Styles.jpg', 'UI Styles', 'A specialized setting showcasing the app\'s adaptable UI architecture, allowing potential layout customizations.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/27_Settings_UI_Styles.jpg" alt="UI Styles" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/27_Settings_UI_Styles.jpg" alt="UI Styles" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">UI Styles</p>
@@ -758,33 +776,33 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/50_Ui_Example_one.jpg', 'UI Example 1', 'A demonstration of the application\'s modern Bento-box layout style, utilizing rounded cards and subtle shadows.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/50_Ui_Example_one.jpg" alt="UI Example 1" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/50_Ui_Example_one.jpg" alt="UI Example 1" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">UI Example 1</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/51_Ui_Example_two.jpg', 'UI Example 2', 'An example of complex data visualization within the app, maintaining high legibility and premium aesthetics.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/51_Ui_Example_two.jpg" alt="UI Example 2" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/51_Ui_Example_two.jpg" alt="UI Example 2" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">UI Example 2</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/52_Ui_Example_three.jpg', 'UI Example 3', 'Showcasing advanced UI interactions like horizontal scrolling carousels and sticky headers.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/52_Ui_Example_three.jpg" alt="UI Example 3" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/52_Ui_Example_three.jpg" alt="UI Example 3" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">UI Example 3</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/25_Dark_Mode_Example.jpg', 'Dark Mode Example', 'A preview of the application\'s deeply integrated dark mode, which inverts colors while preserving brand identity.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/25_Dark_Mode_Example.jpg" alt="Dark Mode Example" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/25_Dark_Mode_Example.jpg" alt="Dark Mode Example" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Dark Mode Example</p>
@@ -805,33 +823,33 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/30_Provider_Settings.jpg', 'Provider Settings', 'The gateway for a standard consumer to upgrade their account into a Service Provider.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/30_Provider_Settings.jpg" alt="Provider Settings" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/30_Provider_Settings.jpg" alt="Provider Settings" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Provider Settings</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/32_Choose_Service_Type.jpg', 'Choose Service Type', 'The crucial step where providers select their primary industry and the specific types of services they offer.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/32_Choose_Service_Type.jpg" alt="Choose Service Type" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/32_Choose_Service_Type.jpg" alt="Choose Service Type" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Choose Service Type</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/33_Setup_Payment_Account.jpg', 'Setup Payment Account', 'The financial onboarding screen prompting the provider to link a bank account for receiving customer payouts.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/33_Setup_Payment_Account.jpg" alt="Setup Payment Account" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/33_Setup_Payment_Account.jpg" alt="Setup Payment Account" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Setup Payment Account</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/34_Stripe_Onboarding.jpg', 'Stripe Onboarding', 'The seamless integration with Stripe Connect, ensuring secure identity verification and regulatory compliance for payouts.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/34_Stripe_Onboarding.jpg" alt="Stripe Onboarding" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/34_Stripe_Onboarding.jpg" alt="Stripe Onboarding" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Stripe Onboarding</p>
@@ -852,57 +870,57 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/37_Store_Dashboard.jpg', 'Store Dashboard', 'The provider\'s command center displaying high-level metrics like revenue, pending bookings, and profile views.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/37_Store_Dashboard.jpg" alt="Store Dashboard" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/37_Store_Dashboard.jpg" alt="Store Dashboard" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Store Dashboard</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/38_Store_Branches_Management.jpg', 'Manage Branches', 'An interface for multi-location businesses to view and configure all their physical storefronts.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/38_Store_Branches_Management.jpg" alt="Manage Branches" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/38_Store_Branches_Management.jpg" alt="Manage Branches" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Manage Branches</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/03_Add_Branch_Address.jpg', 'Add Branch Address', 'A map-based form allowing a provider to precisely locate and register a new branch location.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/03_Add_Branch_Address.jpg" alt="Add Branch Address" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/03_Add_Branch_Address.jpg" alt="Add Branch Address" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Add Branch Address</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/13_Edit_Ot_Create _Store.jpg', 'Create / Edit Store', 'The form for updating the store\'s public-facing metadata, including logo, description, and business hours.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/13_Edit_Ot_Create _Store.jpg" alt="Create / Edit Store" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/13_Edit_Ot_Create _Store.jpg" alt="Create / Edit Store" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Create / Edit Store</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.8s" onclick="openModal('./Octopus screens/42_Manage_Managers_Basic.jpg', 'Manage Managers', 'An access-control screen where the store owner can invite staff members and assign them specific operational roles.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/42_Manage_Managers_Basic.jpg" alt="Manage Managers" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/42_Manage_Managers_Basic.jpg" alt="Manage Managers" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Manage Managers</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.9s" onclick="openModal('./Octopus screens/43_Ongoing_Invitations_For_Store_management.jpg', 'Ongoing Invitations', 'A tracking screen showing which staff invitations have been accepted and which are still pending.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/43_Ongoing_Invitations_For_Store_management.jpg" alt="Ongoing Invitations" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/43_Ongoing_Invitations_For_Store_management.jpg" alt="Ongoing Invitations" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Ongoing Invitations</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1s" onclick="openModal('./Octopus screens/44_Pending_Invitations_For_Store.jpg', 'Pending Invitations', 'The view from a staff member\'s perspective when they receive a request to help manage a store.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/44_Pending_Invitations_For_Store.jpg" alt="Pending Invitations" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/44_Pending_Invitations_For_Store.jpg" alt="Pending Invitations" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Pending Invitations</p>
@@ -923,65 +941,65 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/31_Empty_Products_Settings.jpg', 'Empty Products', 'The initial state prompting a new provider to create their very first service or product listing.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/31_Empty_Products_Settings.jpg" alt="Empty Products" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/31_Empty_Products_Settings.jpg" alt="Empty Products" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Empty Products</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/35_Browse_Product_Categories.jpg', 'Browse Categories', 'An interface for providers to explore standard market categories to correctly classify their new listings.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/35_Browse_Product_Categories.jpg" alt="Browse Categories" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/35_Browse_Product_Categories.jpg" alt="Browse Categories" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Browse Categories</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.6000000000000001s" onclick="openModal('./Octopus screens/36_All_Product_SubCategories.jpg', 'Sub-Categories', 'Deep-diving into sub-categories to ensure products are indexed accurately for the consumer search engine.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/36_All_Product_SubCategories.jpg" alt="Sub-Categories" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/36_All_Product_SubCategories.jpg" alt="Sub-Categories" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Sub-Categories</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.7000000000000001s" onclick="openModal('./Octopus screens/02_Add_Product_Basic_Info.jpg', 'Add Product Info', 'The first step of listing creation, gathering essential data like name, base price, and high-quality images.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/02_Add_Product_Basic_Info.jpg" alt="Add Product Info" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/02_Add_Product_Basic_Info.jpg" alt="Add Product Info" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Add Product Info</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.8s" onclick="openModal('./Octopus screens/41_Manage_Product_Final.jpg', 'Manage Product Final', 'The final review step before publishing a product, allowing configuration of inventory limits and advanced variations.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/41_Manage_Product_Final.jpg" alt="Manage Product Final" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/41_Manage_Product_Final.jpg" alt="Manage Product Final" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Manage Product Final</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.9s" onclick="openModal('./Octopus screens/39_Add_Promotions.jpg', 'Add Promotions', 'A marketing tool allowing providers to create discount codes, flash sales, or bulk-buy deals for their services.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/39_Add_Promotions.jpg" alt="Add Promotions" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/39_Add_Promotions.jpg" alt="Add Promotions" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Add Promotions</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1s" onclick="openModal('./Octopus screens/40_Manage_Promotions.jpg', 'Manage Promotions', 'A dashboard tracking the performance and expiration dates of all active and past promotional campaigns.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/40_Manage_Promotions.jpg" alt="Manage Promotions" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/40_Manage_Promotions.jpg" alt="Manage Promotions" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Manage Promotions</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 1.1s" onclick="openModal('./Octopus screens/04_View_Offer_Details.jpg', 'View Offer Details', 'The detailed breakdown of a specific promotion, showing how many customers have claimed the offer.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/04_View_Offer_Details.jpg" alt="View Offer Details" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/04_View_Offer_Details.jpg" alt="View Offer Details" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">View Offer Details</p>
@@ -1002,17 +1020,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
       <div class="slide-right">
         <div class="phones-row">
       <div class="phone-wrap" style="--anim-delay: 0.4s" onclick="openModal('./Octopus screens/59_Service_Details_Review_LightMode.jpg', 'Service Reviews (Light)', 'The public view of a service listing showing consumer ratings, written reviews, and booking options in Light Mode.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/59_Service_Details_Review_LightMode.jpg" alt="Service Reviews (Light)" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/59_Service_Details_Review_LightMode.jpg" alt="Service Reviews (Light)" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Service Reviews (Light)</p>
       </div>
       <div class="phone-wrap" style="--anim-delay: 0.5s" onclick="openModal('./Octopus screens/57_Service_Details_Reviews_DarkMode.jpg', 'Service Reviews (Dark)', 'The same comprehensive service detail and review interface, beautifully rendered in Dark Mode.')">
-        <div class="phone-frame">
+        <div class="phone-frame skeleton">
           <div class="phone-notch"></div>
-          <img src="./Octopus screens/57_Service_Details_Reviews_DarkMode.jpg" alt="Service Reviews (Dark)" loading="lazy" draggable="false"/>
+          <img src="./Octopus screens/57_Service_Details_Reviews_DarkMode.jpg" alt="Service Reviews (Dark)" loading="eager" draggable="false" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');" onerror="handleImgError(this)"/>
           <div class="phone-hover-overlay"><span class="hover-icon">✨</span></div>
         </div>
         <p class="phone-caption">Service Reviews (Dark)</p>
@@ -1167,15 +1185,51 @@ slideRights.forEach(container => {
 });
 
 // Modal Logic
-function openModal(imgSrc, title, desc) {
+function openModal(imgSrc, title, desc, retries = 3) {
   if (window.isDragging) return;
-  document.getElementById('modal-img').src = imgSrc;
-  // Make the first word of the title highlighted
+  
+  const modalPhone = document.querySelector('.modal-phone');
+  const imgEl = document.getElementById('modal-img');
+  
+  // Apply skeleton to modal phone while loading
+  modalPhone.classList.add('skeleton');
+  imgEl.style.opacity = '0';
+  imgEl.classList.remove('loaded');
+  
   const words = title.split(' ');
   const firstWord = words.shift();
   document.getElementById('modal-title').innerHTML = '<span>' + firstWord + '</span> ' + words.join(' ');
   document.getElementById('modal-desc').textContent = desc;
   document.getElementById('modal-overlay').classList.add('active');
+
+  const tempImg = new Image();
+  tempImg.onload = () => {
+    imgEl.src = tempImg.src;
+    imgEl.style.opacity = '1';
+    imgEl.classList.add('loaded');
+    modalPhone.classList.remove('skeleton');
+  };
+  tempImg.onerror = () => {
+    if (retries > 0) {
+      console.warn('Image load failed, retrying...', imgSrc);
+      setTimeout(() => openModal(imgSrc, title, desc, retries - 1), 500);
+    } else {
+      imgEl.alt = "Failed to load screenshot.";
+      modalPhone.classList.remove('skeleton');
+    }
+  };
+  // Cache busting query for retries
+  tempImg.src = retries < 3 ? imgSrc + '?retry=' + Date.now() : imgSrc;
+}
+
+function handleImgError(imgEl) {
+  // Retry logic for main gallery images if needed
+  if (!imgEl.dataset.retried) {
+    imgEl.dataset.retried = 1;
+    setTimeout(() => {
+      imgEl.src = imgEl.src.split('?')[0] + '?retry=' + Date.now();
+    }, 1000);
+  }
 }
 
 function closeModal(evt) {
